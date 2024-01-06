@@ -4,8 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #container {
+            background-color: #ccc;
+            width: 90%;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        .box{
+            background-color: yellow;
+            width: 10%;
+            height: 10vh;
+        }
+
+        p{
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
+        <input type="checkbox" class='species cat' value='cat' data-species="cat" onclick='test(event)'> Cat</input>
+        <input type="checkbox" class='species dog' value='dog' data-species="dog" onclick='test(event)'> Dog</input>
+        <input type="checkbox" class='species fish' value='fish' data-species="fish" onclick='test(event)'> Fish</input>
+        <hr>
+        <input type="checkbox" class='species cat' value='cat' data-gender="" onclick='test(event)'> All</input>
+        <input type="checkbox" class='species dog' value='dog' data-gender="male" onclick='test(event)'> Male</input>
+        <input type="checkbox" class='species fish' value='fish' data-gender="female" onclick='test(event)'> Female</input>
     
+    
+    
+    <div id='container'>
+    </div>
+
+    <button id='reset'>reset</button>
+    <button id='display' >display</button>
+    
+
+    <script>
+        console.log(document.querySelector(".cat").dataset.species);
+        let speciesArr = [];
+        let genderArr = [];
+        let obj = new Map()
+
+        
+        const test = (e) => {
+            speciesArr.push(e.target.dataset.species)
+            obj.set("species",speciesArr)
+
+            genderArr.push(e.target.dataset.gender)
+            obj.set("gender",genderArr)
+
+            console.log(obj);
+
+            localStorage.setItem("objLocal",JSON.stringify(...obj))
+            let item = localStorage.getItem("obj")
+            console.log(item);
+        }
+
+        // const obj = [
+        //     {"fname":"Yooran", "lname":"Kim", "num":10},
+        //     {"fname":"Mike", "lname":"Lee", "num":20}
+        // ]
+
+        const reset = () => {
+            document.querySelector("#container").innerHTML = ""
+        }
+
+        const displayBox = () => {
+            // reset function
+
+            // data 가져오기
+            obj.map((item,id)=>{
+                console.log(item);
+                console.log(item.fname);
+                console.log(id);
+
+                let box = document.createElement("div");
+                let p = document.createElement("p")
+                let span = document.createElement("span")
+
+                p.innerText = item.fname
+                span.innerText= item.lname
+
+                // box추가
+                box.className = "box"
+                box.append(p,span)
+                document.querySelector("#container").append(box)
+            })
+
+            // 디스플레이
+
+        }
+        
+
+        document.querySelector("#reset").addEventListener("click",reset)
+        document.querySelector("#display").addEventListener("click",displayBox)
+    </script>
 </body>
 </html>
