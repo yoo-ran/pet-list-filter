@@ -24,14 +24,15 @@
     </style>
 </head>
 <body>
-        <input type="checkbox" class='species cat' value='cat' data-species="cat" onclick='test(event)'> Cat</input>
-        <input type="checkbox" class='species dog' value='dog' data-species="dog" onclick='test(event)'> Dog</input>
-        <input type="checkbox" class='species fish' value='fish' data-species="fish" onclick='test(event)'> Fish</input>
-        <hr>
-        <input type="checkbox" class='species cat' value='cat' data-gender="" onclick='test(event)'> All</input>
-        <input type="checkbox" class='species dog' value='dog' data-gender="male" onclick='test(event)'> Male</input>
-        <input type="checkbox" class='species fish' value='fish' data-gender="female" onclick='test(event)'> Female</input>
-    
+
+        <button type='button' class='species' data-species="" onclick='test(event)'>All</button>
+        <button type='button' class='species' data-species="cat" onclick='test(event)'>Cat</button>
+        <button type='button' class='species' data-species="dog" onclick='test(event)'>Dog</button>
+        <button type='button' class='species' data-species="fish" onclick='test(event)'>Fish</button>
+        <!-- <input type="checkbox" class='gender all' value='cat' data-gender="" onclick='test(event)'> All</input>
+        <input type="checkbox" class='gender male' value='dog' data-gender="male" onclick='test(event)'> Male</input>
+        <input type="checkbox" class='gender female' value='fish' data-gender="female" onclick='test(event)'> Female</input>
+     -->
     
     
     <div id='container'>
@@ -42,30 +43,71 @@
     
 
     <script>
-        console.log(document.querySelector(".cat").dataset.species);
         let speciesArr = [];
-        let genderArr = [];
-        let obj = new Map()
+        let item = localStorage.getItem("obj")
+        let localArr = JSON.parse(sessionStorage.getItem("objLocal"))
+
+        const obj = [
+            {"fname":"Yooran", "lname":"Kim", "num":10, "species":"cat"},
+            {"fname":"Mike", "lname":"Lee", "num":20,"species":"dog"},
+            {"fname":"aa", "lname":"bb", "num":30,"species":"dog"},
+            {"fname":"Barry", "lname":"Choi", "num":40,"species":"fish"}
+        ]
+
 
         
         const test = (e) => {
+            
+            console.log(localArr);
+            localArr.forEach(element => {
+                console.log(element);
+                if(element!=e.target.dataset.species){
+                    console.log("yes");
+                }
+            })
+            
+            
             speciesArr.push(e.target.dataset.species)
-            obj.set("species",speciesArr)
+            
+            sessionStorage.setItem("objLocal",JSON.stringify(speciesArr))
+            
+            console.log(localArr);
+            
+            document.querySelector("#container").innerHTML = ""
+            // // 리프레시한상태에서도 남아있게
+            
 
-            genderArr.push(e.target.dataset.gender)
-            obj.set("gender",genderArr)
 
-            console.log(obj);
+            obj.map((item,id)=>{
+                    // console.log(item);
+                    // console.log(item.fname);
+                    // console.log(id);
 
-            localStorage.setItem("objLocal",JSON.stringify(...obj))
-            let item = localStorage.getItem("obj")
-            console.log(item);
-        }
+                    localArr.map(localSpecies => {
 
-        // const obj = [
-        //     {"fname":"Yooran", "lname":"Kim", "num":10},
-        //     {"fname":"Mike", "lname":"Lee", "num":20}
-        // ]
+                        if(item.species==localSpecies){
+                            console.log(item);
+
+                            let box = document.createElement("div");
+                            let p = document.createElement("p")
+                            let span = document.createElement("span")
+
+                            p.innerText = item.fname
+                            span.innerText= item.species
+
+                            // box추가
+                            box.className = "box"
+                            box.append(p,span)
+                            document.querySelector("#container").append(box)
+                        }
+                    })
+        
+        })
+            
+            
+    }
+
+        
 
         const reset = () => {
             document.querySelector("#container").innerHTML = ""
