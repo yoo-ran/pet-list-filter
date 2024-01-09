@@ -34,7 +34,8 @@
  -->
 
     <input type="text" onkeyup='search(event)' id='search' placeholder='search'>
-
+    <button id='ascending' onclick='ascending()'>A-Z</button>
+    <button id='descending' onclick='descending()'>Z-A</button>
     <hr>
     <button id='clear'>Clear</button>
 
@@ -145,6 +146,66 @@
                    createCard(item)
                 }
             });
+        }
+
+        const ascending = () => {
+            reset()
+            if(speciesSession==null || speciesSession==""){
+                ascendingSort(obj)
+                obj.forEach(element => {
+                        createCard(element)
+                    });
+            }else{
+                ascendingSort(obj)
+                obj.forEach(element => {
+                        if(speciesSession.includes(element.species)){
+                            createCard(element)
+                            
+                        }
+                }); 
+            }
+        }
+        const descending = () => {
+            reset()
+            if(speciesSession==null || speciesSession==""){
+                descendingSort(obj)
+                obj.forEach(element => {
+                        createCard(element)
+                    });
+            }else{
+                descendingSort(obj)
+                obj.forEach(element => {
+                        if(speciesSession.includes(element.species)){
+                            createCard(element)
+                            
+                        }
+                }); 
+            }
+        }
+
+        const ascendingSort = (object) =>{
+            object.sort((a,b) =>{
+                    // Regardless of letter case
+                    const nameA = (a.fname).toUpperCase();
+                    const nameB = (b.fname).toUpperCase();
+
+                    if(nameA > nameB) return 1;
+                    if(nameA < nameB) return -1;
+                    if(nameA === nameB) return 0;
+                })
+            return object
+        }
+        const descendingSort = (object) =>{
+            object.sort((a,b) =>{
+                    // Regardless of letter case
+                    const nameA = (a.fname).toUpperCase();
+                    const nameB = (b.fname).toUpperCase();
+
+                    if(nameA < nameB) return 1;
+                    if(nameA > nameB) return -1;
+                    if(nameA === nameB) return 0;
+                })
+            return object;
         }
         
 
