@@ -33,6 +33,8 @@
     <input type="checkbox" class='gender female' value='fish' data-gender="female" onclick='test(event)'> Female</input>
  -->
 
+    <input type="text" onkeyup='search(event)' id='search' placeholder='search'>
+
     <hr>
     <button id='clear'>Clear</button>
 
@@ -132,6 +134,17 @@
             load()
 
             // 삭제하자마다 사라지게
+        }
+
+        const search = (e) => {
+            reset()
+            let inputValue = e.target.value.toUpperCase()
+            obj.forEach(item => {
+                let petName = item.fname.toUpperCase()
+                if(petName.indexOf(inputValue)>-1){
+                   createCard(item)
+                }
+            });
         }
         
 
