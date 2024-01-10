@@ -24,10 +24,10 @@
     </style>
 </head>
 <body>
-    <button type='button' class='species' data-species="" onclick='test(event)'>All</button>
-    <button type='button' class='species' data-species="cat" onclick='test(event)'>Cat</button>
-    <button type='button' class='species' data-species="dog" onclick='test(event)'>Dog</button>
-    <button type='button' class='species' data-species="fish" onclick='test(event)'>Fish</button>
+    <button type='button' class='species' data-species="" onclick='categorySearch(event)'>All</button>
+    <button type='button' class='species' data-species="cat" onclick='categorySearch(event)'>Cat</button>
+    <button type='button' class='species' data-species="dog" onclick='categorySearch(event)'>Dog</button>
+    <button type='button' class='species' data-species="fish" onclick='categorySearch(event)'>Fish</button>
     <!-- <input type="checkbox" class='gender all' value='cat' data-gender="" onclick='test(event)'> All</input>
     <input type="checkbox" class='gender male' value='dog' data-gender="male" onclick='test(event)'> Male</input>
     <input type="checkbox" class='gender female' value='fish' data-gender="female" onclick='test(event)'> Female</input>
@@ -37,7 +37,7 @@
     <button id='ascending' onclick='ascending()'>A-Z</button>
     <button id='descending' onclick='descending()'>Z-A</button>
     <hr>
-    <button id='clear'>Clear</button>
+    <button id='clear' onclick='clear()'>Clear</button>
 
     <div id='container'>
     </div>
@@ -60,6 +60,7 @@
                         createCard(element)
                     });
             }else{
+                console.log(speciesSession);
                 obj.forEach(element => {
                         if(speciesSession.includes(element.species)){
                             createCard(element)
@@ -92,12 +93,11 @@
 
         const clear = () => {
             sessionStorage.removeItem("species")
-            load()
-            console.log("clear");
+            load();
         }
 
 
-        const test = (e) =>{
+        const categorySearch = (e) =>{
             let clikedSpecies = e.target.dataset.species
             // If there is data in session storage
             if(speciesSession!=null ){
@@ -105,7 +105,6 @@
                 if(clikedSpecies==""){
                     speciesSession=[]
                     document.querySelectorAll(".species") .forEach(element => {
-                        console.log(element.dataset.species);
                         speciesSession.push(element.dataset.species)
                     });
                     speciesSession.shift()
@@ -117,13 +116,15 @@
                         speciesSession.push(clikedSpecies)
                         setSessionStorage("species",speciesSession)
                     
+                    // Remove category from session storage
                     // If there is already species in session storage 
                     // That category should be removed from session storage
                     }else{
-                        let removeSpecies = speciesSession.filter( species => {
+                        speciesSession = speciesSession.filter(species => {
                             return species != clikedSpecies
                         })
-                        setSessionStorage("species",removeSpecies)
+                        
+                        setSessionStorage("species",speciesSession)
                     }
                 }
             // If there is no data in session storage
@@ -132,7 +133,8 @@
                 speciesSession = [clikedSpecies]
                 setSessionStorage("species",speciesSession)
             }
-            load()
+
+            load();
 
             // 삭제하자마다 사라지게
         }
@@ -160,11 +162,11 @@
                 obj.forEach(element => {
                         if(speciesSession.includes(element.species)){
                             createCard(element)
-                            
                         }
                 }); 
             }
         }
+
         const descending = () => {
             reset()
             if(speciesSession==null || speciesSession==""){
@@ -180,7 +182,7 @@
                             
                         }
                 }); 
-            }
+            } 
         }
 
         const ascendingSort = (object) =>{
@@ -193,7 +195,7 @@
                     if(nameA < nameB) return -1;
                     if(nameA === nameB) return 0;
                 })
-            return object
+            return object;
         }
         const descendingSort = (object) =>{
             object.sort((a,b) =>{
