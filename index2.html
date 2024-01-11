@@ -34,8 +34,7 @@
  -->
 
     <input type="text" onkeyup='search(event)' id='search' placeholder='search'>
-    <button id='ascending' onclick='ascending(event)' data-ascending="false">A-Z</button>
-    <button id='descending' onclick='descending()'>Z-A</button>
+    <button id='ascending' onclick='ascending(event)' data-sort="ascending">A-Z</button>
     <hr>
     <button id='clear' onclick='clear()'>Clear</button>
 
@@ -45,30 +44,32 @@
 
     <script>
         let speciesSession = JSON.parse(sessionStorage.getItem("species"))
-        let sortedObjSession = JSON.parse(sessionStorage.getItem("sortedObj"))
-
-         const obj = [
+        let originalObjSession = JSON.parse(sessionStorage.getItem("originalObj"))
+        
+        const obj = [
             {"fname":"Yooran", "lname":"Kim", "num":10, "species":"cat"},
             {"fname":"Mike", "lname":"Lee", "num":20,"species":"dog"},
             {"fname":"aa", "lname":"bb", "num":30,"species":"dog"},
             {"fname":"Barry", "lname":"Choi", "num":40,"species":"fish"}
         ]
+
         
         const load = () =>{
             reset()
+            let sortedObjSession = JSON.parse(sessionStorage.getItem("sortedObj"))
             if(speciesSession==null || speciesSession==""){
                 if(sortedObjSession==null || sortedObjSession==""){
-                    obj.forEach(element => {
-                            createCard(element)
-                        });
-                }else {
+                    originalObjSession.forEach(element => {
+                        createCard(element)
+                    })
+                }else{
                     sortedObjSession.forEach(element => {
                         createCard(element)
                     })
                 }
             }else{
                 if(sortedObjSession==null || sortedObjSession==""){
-                    obj.forEach(element => {
+                    originalObjSession.forEach(element => {
                         if(speciesSession.includes(element.species)){
                             createCard(element)
                         }
@@ -168,43 +169,25 @@
         // 
 
         const ascending = (e) => {
-            reset()
-            ascendingSort(obj)
-            console.log(e.target.dataset.ascending);
-            switch (e.target.dataset.ascending) {
-                case "true":
-                    load()
-                    setSessionStorage("ascending","false")
-                    e.target.dataset.ascending = "false";
+            console.log(e.target.dataset.sort);
+            switch (e.target.dataset.sort) {
+                case "ascending":
+                    ascendingSort(obj)
+                    e.target.dataset.sort = "descending";
+                    e.target.innerText = "Z-A"
+
                 break;
-                case "false":
-                    clear();
-                    e.target.dataset.ascending = "true";
-                    setSessionStorage("ascending","true")
+                case "descending":
+                    descendingSort(obj)
+                    e.target.dataset.sort = "ascending";
+                    e.target.innerText = "A-Z"
                 break;
             }
-            
-        }
-
-        const descending = () => {
-            reset()
-            descendingSort(obj)
-            if(speciesSession==null || speciesSession==""){
-                obj.forEach(element => {
-                        createCard(element)
-                    });
-            }else{
-                obj.forEach(element => {
-                        if(speciesSession.includes(element.species)){
-                            createCard(element)
-                            
-                        }
-                }); 
-            } 
+            load()
         }
 
         const ascendingSort = (object) =>{
-            object.sort((a,b) =>{
+                object.sort((a,b) =>{
                     // Regardless of letter case
                     const nameA = (a.fname).toUpperCase();
                     const nameB = (b.fname).toUpperCase();
@@ -217,7 +200,7 @@
         }
 
         const descendingSort = (object) =>{
-            object.sort((a,b) =>{
+                object.sort((a,b) =>{
                     // Regardless of letter case
                     const nameA = (a.fname).toUpperCase();
                     const nameB = (b.fname).toUpperCase();
@@ -226,10 +209,11 @@
                     if(nameA > nameB) return -1;
                     if(nameA === nameB) return 0;
                 })
-            return object;
+            setSessionStorage("sortedObj", object)
         }
         
-
+        
+        setSessionStorage("originalObj", obj)
         window.addEventListener("load", load)
         document.querySelector("#clear").addEventListener("click",clear)
 
