@@ -34,7 +34,7 @@
  -->
 
     <input type="text" onkeyup='search(event)' id='search' placeholder='search'>
-    <button id='ascending' onclick='ascending(event)' data-sort="ascending">A-Z</button>
+    <button id='ascending' onclick='sort(event)' data-sort="ascending">A-Z</button>
     <hr>
     <button id='clear' onclick='clear()'>Clear</button>
 
@@ -56,6 +56,7 @@
         
         const load = () =>{
             reset()
+            let speciesSession = JSON.parse(sessionStorage.getItem("species"))
             let sortedObjSession = JSON.parse(sessionStorage.getItem("sortedObj"))
             if(speciesSession==null || speciesSession==""){
                 if(sortedObjSession==null || sortedObjSession==""){
@@ -150,10 +151,8 @@
                 speciesSession = [clikedSpecies]
                 setSessionStorage("species",speciesSession)
             }
-
             load();
 
-            // 삭제하자마다 사라지게
         }
 
         const search = (e) => {
@@ -168,8 +167,7 @@
         }
         // 
 
-        const ascending = (e) => {
-            console.log(e.target.dataset.sort);
+        const sort = (e) => {
             switch (e.target.dataset.sort) {
                 case "ascending":
                     ascendingSort(obj)
