@@ -1,0 +1,182 @@
+[
+  {
+    "img": "./images/mcleod.jpg",
+    "name": "Mcleod",
+    "gender": "male",
+    "breed": "Golden Retreiver",
+    "age": 2,
+    "distance": 9,
+    "species": "dog"
+  },
+  {
+    "img": "./images/mccullough.jpg",
+    "name": "Mccullough",
+    "gender": "male",
+    "breed": "Dachshund",
+    "age": 4,
+    "distance": 7,
+    "species": "dog"
+  },
+  {
+    "img": "./images/dickson.jpg",
+    "name": "Dickson",
+    "gender": "male",
+    "breed": "Cocker Spaniel",
+    "age": 4,
+    "distance": 7,
+    "species": "dog"
+  },
+  {
+    "img": "./images/trujillo.jpg",
+    "name": "Trujillo",
+    "gender": "male",
+    "breed": "Labrador Retriever",
+    "age": 9,
+    "distance": 3,
+    "species": "dog"
+  },
+  {
+    "img": "./images/holland.jpg",
+    "name": "Holland",
+    "gender": "male",
+    "breed": "Shiba",
+    "age": 5,
+    "distance": 8,
+    "species": ""
+  },
+  {
+    "img": "./images/deanne.jpg",
+    "name": "Deanne",
+    "gender": "female",
+    "breed": "Chihuahua",
+    "age": 2,
+    "distance": 4,
+    "species": "dog"
+  },
+  {
+    "img": "./images/althea.jpg",
+    "name": "Althea",
+    "gender": "female",
+    "breed": "Golden Retreiver",
+    "age": 0.5,
+    "distance": 10,
+    "species": ""
+  },
+  {
+    "img": "./images/susie.jpg",
+    "name": "Susie",
+    "gender": "female",
+    "breed": "Siberian Husky",
+    "age": 6,
+    "distance": 4,
+    "species": "dog"
+  },
+  {
+    "img": "./images/newton.jpg",
+    "name": "Newton",
+    "gender": "male",
+    "breed": "Siamese",
+    "age": 2,
+    "distance": 5,
+    "species": "cat"
+  },
+  {
+    "img": "./images/annmarie.jpg",
+    "name": "Annmarie",
+    "gender": "female",
+    "breed": "Maine Coon",
+    "age": 4,
+    "distance": 10,
+    "species": "cat"
+  },
+  {
+    "img": "./images/lorene.jpg",
+    "name": "Lorene",
+    "gender": "female",
+    "breed": "British Shorthair",
+    "age": 5,
+    "distance": 2,
+    "species": "cat"
+  },
+  {
+    "img": "./images/estelle.jpg",
+    "name": "Estelle",
+    "gender": "female",
+    "breed": "American Shorthair",
+    "age": 8,
+    "distance": 6,
+    "species": "cat"
+  },
+  {
+    "img": "./images/antoinette.jpg",
+    "name": "Antoinette",
+    "gender": "female",
+    "breed": "Abyssinian",
+    "age": 7,
+    "distance": 9,
+    "species": "cat"
+  },
+  {
+    "img": "./images/kate.jpg",
+    "name": "Kate",
+    "gender": "female",
+    "breed": "Burmese",
+    "age": 0.7,
+    "distance": 2,
+    "species": "cat"
+  },
+  {
+    "img": "./images/perez.jpg",
+    "name": "Perez",
+    "gender": "male",
+    "breed": "Balinese",
+    "age": 9,
+    "distance": 8,
+    "species": "cat"
+  },
+  {
+    "img": "./images/cassandra.jpeg",
+    "name": "Cassandra",
+    "gender": "female",
+    "breed": "Guppies",
+    "age": 2,
+    "distance": 5,
+    "species": "fish"
+  },
+  {
+    "img": "./images/mccoy.jpeg",
+    "name": "Mccoy",
+    "gender": "male",
+    "breed": "Neon Tetra",
+    "age": 1,
+    "distance": 0.8,
+    "species": "fish"
+  },
+  {
+    "img": "./images/bubble.jpeg",
+    "name": "Bubble",
+    "gender": "female",
+    "breed": "Tiger Barb",
+    "age": 1,
+    "distance": 1,
+    "species": "fish"
+  },
+  {
+    "img": "./images/bell.jpg",
+    "name": "Bell",
+    "gender": "female",
+    "breed": "Canaries",
+    "age": 2,
+    "distance": 1.2,
+    "species": "bird"
+  },
+  {
+    "img": "./images/hikaru .jpg",
+    "name": "Hikaru",
+    "gender": "male",
+    "breed": "Parakeets",
+    "age": 2,
+    "distance": 4,
+    "species": "bird"
+  }
+]
