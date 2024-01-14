@@ -52,29 +52,17 @@ const load = () =>{
 }
 
 const createCard = (obj) => {
-    // let box = document.createElement("div");
-    // let p = document.createElement("p")
-    // let span = document.createElement("span")
-
-    // p.innerText = item.fname
-    // span.innerText= item.species
-
-    // // box추가
-    // box.className = "box"
-    // box.append(p,span)
-    // document.querySelector("#container").append(box)
-
     let colBox = document.createElement("div");
     let gender = obj.gender=="male" ? '<i class="fa-solid fa-mars"></i>' :'<i class="fa-solid fa-venus"></i>';
     
-    colBox.innerHTML= ` <div class="col">
+    colBox.innerHTML= ` <div class="col card-col">
                             <div class="card h-100">
                                 <img src="${obj.img}" class="card-img-top" alt="${obj.name}">
                                 <i class="fa-regular fa-heart"></i>
                                 <div class="card-body">
-                                    <h5 class="card-title">${obj.name} ${gender}</h5>
-                                    <span>${obj.breed} | ${obj.age} years</span>
-                                    <p class="card-text"><i class="fa-solid fa-location-dot"></i> ${obj.distance}km</p>
+                                    <h4 class="card-title">${obj.name} ${gender}</h4>
+                                    <p class="card-text breedText">${obj.breed} | ${obj.age} years</p>
+                                    <p class="card-text distanceText"><i class="fa-solid fa-location-dot"></i> ${obj.distance}km</p>
                                 </div>
                             </div>
                         </div>`
@@ -137,8 +125,8 @@ const categorySearch = (e) =>{
 const search = (e) => {
     reset()
     let inputValue = e.target.value.toUpperCase()
-    obj.forEach(item => {
-        let petName = item.fname.toUpperCase()
+    sortedObj.forEach(item => {
+        let petName = item.name.toUpperCase()
         if(petName.indexOf(inputValue)>-1){
            createCard(item)
         }

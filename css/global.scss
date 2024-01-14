@@ -1,16 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Open+Sans:wght@300;400&display=swap");
+$white: #FFFBF4;
+$beige: #FBEDDD;
+$blue: #99C3F3;
+$gray: #736C65;
+$black: #544E49;
+$titleFont : 'Fredoka', sans-serif;
+$card-height: 100%;
+
 * {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
   font-size: 16px;
-  background-color: #FFFBF4;
+  background-color: $white;
 }
 
-.categoryBox {
+.categoryBox{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +27,7 @@ body {
   padding: 3rem 0;
 }
 
-.categoryBtn {
+.categoryBtn{
   width: 15rem;
   display: flex;
   justify-content: space-between;
@@ -29,44 +37,43 @@ body {
   width: 24%;
 }
 
-.species, #ascending {
-  background-color: #99C3F3;
-  color: #544E49;
+.species, #ascending{
+  background-color: $blue;
+  color: $black;
 }
 
 .button {
-  border: 0.1rem solid #99C3F3;
+  border: 0.1rem solid $blue;
   border-radius: 0.4em;
   padding: 0.3em;
   font-size: 1rem;
-}
-.button:hover {
-  opacity: 0.9;
-}
-
-#search::-moz-placeholder {
-  color: #736C65;
+  &:hover{
+    opacity: 0.9;
+  }
 }
 
-#search::placeholder {
-  color: #736C65;
+#search{
+  &::placeholder{
+    color: $gray;
+  }
 }
 
 #clear {
-  background-color: #736C65;
+  background-color: $gray;
   border: 0.1rem solid transparent;
-  color: #FFFBF4;
+  color: $white;
   border-radius: 0.4rem;
   padding: 0.3rem 0;
   font-size: 1rem;
-}
-#clear:hover {
-  background-color: #544E49;
-  border: 0.1rem solid #544E49;
-  color: #FFFBF4;
+
+  &:hover{
+    background-color: $black;
+    border: 0.1rem solid $black;
+    color: $white;
+  }
 }
 
-#clear, #ascending, #search {
+#clear, #ascending, #search{
   width: 15rem;
 }
 
@@ -76,7 +83,7 @@ body {
   padding-bottom: 3rem;
 }
 
-.card-col {
+.card-col{
   height: 28rem;
 }
 
@@ -84,50 +91,51 @@ body {
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
-}
-.card:hover {
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  &:hover{
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.30);
+  }
 }
 
-.card-img-top {
+
+.card-img-top{
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
-.card-body {
+.card-body{
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 60%;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
   display: flex;
   flex-direction: column;
   justify-content: end;
-  color: #FFFBF4;
+  color: $white;
+  
 }
 
-h4.card-title {
-  font-family: "Fredoka", sans-serif;
-  color: #FFFBF4;
+h4.card-title{
+  font-family: $titleFont;
+  color: $white;
   font-size: 2rem;
 }
 
-.card-text {
+.card-text{
   font-size: 0.8em;
 }
 
-.breedText {
+.breedText{
   opacity: 0.8;
 }
 
-.distanceText {
-  color: #FBEDDD;
+.distanceText{
+  color: $beige;
 }
 
 .fa-heart {
-  color: #99C3F3;
+  color: $blue;
   z-index: 2;
   font-size: 1.5rem;
   position: absolute;
@@ -135,13 +143,17 @@ h4.card-title {
   right: 1rem;
 }
 
-@media screen and (min-width: 992px) {
-  body {
+
+
+@media screen and (min-width:992px) {
+  body{
     font-size: 20px;
   }
-  .categoryBox {
+
+  .categoryBox{
     flex-direction: row;
-    -moz-column-gap: 1.5rem;
-         column-gap: 1.5rem;
+    column-gap: 1.5rem;
   }
-}/*# sourceMappingURL=global.css.map */
+
+
+}
