@@ -40,10 +40,19 @@ const load = () =>{
                     createCard(element)
                 }
             }); 
+            
+
         }else {
             sortedObjSession.forEach(element => {
                 if(speciesSession.includes(element.species)){
                     createCard(element)
+                }
+            })
+            console.log(document.querySelectorAll(".species"))
+            document.querySelectorAll(".species").forEach(btn=>{
+                if(speciesSession.includes(btn.dataset.species)){
+                    console.log(btn);
+                    btn.classList.add("clickedBtn")
                 }
             })
         }
@@ -78,21 +87,21 @@ const reset = () => {
 const clear = () => {
     sessionStorage.removeItem("species")
     sessionStorage.removeItem("sortedObj")
+    document.querySelector("#search").value ="";
     load()
 }
 
 
 const categorySearch = (e) =>{
     let clikedSpecies = e.target.dataset.species
+    let speciesSession = JSON.parse(sessionStorage.getItem("species"))
+    console.log(e.target.classList);
+    e.target.classList.toggle("clickedBtn")
     // If there is data in session storage
     if(speciesSession!=null ){
         // When user clidked "All"
         if(clikedSpecies==""){
             speciesSession=[]
-            document.querySelectorAll(".species") .forEach(element => {
-                speciesSession.push(element.dataset.species)
-            });
-            speciesSession.shift()
             setSessionStorage("species",speciesSession)
         }else{
             // If there is no species in the session storage as same as species that user slicked
@@ -124,11 +133,22 @@ const categorySearch = (e) =>{
 
 const search = (e) => {
     reset()
-    let inputValue = e.target.value.toUpperCase()
+    let speciesSession = JSON.parse(sessionStorage.getItem("species"));
+    let speciesSessionNull = [];
+    document.querySelectorAll(".species").forEach(species =>{
+        speciesSessionNull.push(species.dataset.species)
+    })
+    speciesSessionNull.shift()
+    speciesSession = JSON.parse(sessionStorage.getItem("species"))==null ? speciesSessionNull : JSON.parse(sessionStorage.getItem("species"))
+    let inputValue = e.target.value.toUpperCase();
     sortedObj.forEach(item => {
-        let petName = item.name.toUpperCase()
-        if(petName.indexOf(inputValue)>-1){
-           createCard(item)
+        for(let i=0;i<speciesSession.length;i++){
+            if(item.species==speciesSession[i]){
+                let petName = item.name.toUpperCase()
+                if(petName.indexOf(inputValue)>-1){
+                   createCard(item)
+                }
+            }
         }
     });
 }
@@ -139,13 +159,15 @@ const sort = (e) => {
         case "ascending":
             ascendingSort(sortedObj)
             e.target.dataset.sort = "descending";
-            e.target.innerText = "Z-A"
-
+            e.target.innerText = "Z-A";
+            e.target.classList.replace("ascending","descending")
         break;
         case "descending":
             descendingSort(sortedObj)
             e.target.dataset.sort = "ascending";
-            e.target.innerText = "A-Z"
+            e.target.innerText = "A-Z";
+            e.target.classList.replace("descending","ascending")
+
         break;
     }
     load()
