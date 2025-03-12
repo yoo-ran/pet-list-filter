@@ -133,13 +133,13 @@ const categorySearch = (e) =>{
 
 const search = (e) => {
     reset()
-    let speciesSession = JSON.parse(sessionStorage.getItem("species"));
     let speciesSessionNull = [];
     document.querySelectorAll(".species").forEach(species =>{
         speciesSessionNull.push(species.dataset.species)
     })
     speciesSessionNull.shift()
-    speciesSession = JSON.parse(sessionStorage.getItem("species"))==null ? speciesSessionNull : JSON.parse(sessionStorage.getItem("species"))
+    let speciesSession = JSON.parse(sessionStorage.getItem("species"))==null ? speciesSessionNull : JSON.parse(sessionStorage.getItem("species"))
+    
     let inputValue = e.target.value.toUpperCase();
     sortedObj.forEach(item => {
         for(let i=0;i<speciesSession.length;i++){
